@@ -6,18 +6,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class Message {
     private String username;
     private String message;
-    private MessageDetail details;
+    private String timestamp;
+    private String chatRoomName;
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "username='" + username + '\'' +
-                ", message='" + message + '\'' +
-                ", details=" + details.toString() +
-                '}';
+    public Message(String username, String message, String chatRoomName) {
+        this.username = username;
+        this.message = message;
+        this.timestamp = String.valueOf(System.currentTimeMillis());
+        this.chatRoomName = chatRoomName;
     }
 }
