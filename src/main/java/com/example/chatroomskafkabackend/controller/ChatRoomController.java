@@ -15,7 +15,6 @@ public class ChatRoomController {
     @MessageMapping("/chatRoom/{chatRoomName}")
     @SendTo("/topic/{chatRoomName}")
     public Message getMessage(@Payload Message message, @DestinationVariable String chatRoomName) {
-        log.info(message.toString());
         return message;
     }
 }
