@@ -17,4 +17,14 @@ public class Message {
         this.timestamp = String.valueOf(System.currentTimeMillis());
         this.chatRoomName = chatRoomName;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "username='" + username + '\'' +
+                ", message='" + message + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", chatRoomName='" + chatRoomName + '\'' +
+                '}';
+    }
 }
