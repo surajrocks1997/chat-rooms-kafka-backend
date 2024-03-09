@@ -18,6 +18,7 @@ public class ChatRoomController {
 
     @MessageMapping("/chatRoom/{chatRoomName}")
     public void getMessage(@Payload Message message, @DestinationVariable String chatRoomName) {
+        message.setTimestamp(String.valueOf(System.currentTimeMillis()));
         service.sendMessage(chatRoomName, message);
     }
 }
