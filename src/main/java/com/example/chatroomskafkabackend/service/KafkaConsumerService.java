@@ -17,13 +17,13 @@ public class KafkaConsumerService {
 
     @KafkaHandler
     public void consumeChatRoomMessages(Message message) {
-        log.info("Message String: {}", message);
+        log.info("FROM Kafka Consumer Service - MESSAGE OBJECT: {}", message);
         subscribersService.sendToSubscriber(message, message.getChatRoomName());
 
     }
 
     @KafkaHandler(isDefault = true)
     public void handleMessage(Object message) {
-        log.info("Default message is: {}", message.toString());
+        log.info("FROM Kafka Consumer Service - DEFAULT Kafka Handler: {}", message.toString());
     }
 }

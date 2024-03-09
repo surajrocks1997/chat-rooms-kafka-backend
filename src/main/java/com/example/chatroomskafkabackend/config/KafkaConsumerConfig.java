@@ -1,5 +1,6 @@
 package com.example.chatroomskafkabackend.config;
 
+import com.example.chatroomskafkabackend.exceptionHandler.KafkaConsumerErrorHandler;
 import com.example.chatroomskafkabackend.pojo.Message;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -10,6 +11,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.listener.CommonErrorHandler;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
@@ -39,6 +41,12 @@ public class KafkaConsumerConfig {
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Message>> messageConsumerListenerFactory(ConsumerFactory<String, Message> consumerFactory) {
         ConcurrentKafkaListenerContainerFactory<String, Message> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
+        factory.setCommonErrorHandler(commonErrorHandler());
         return factory;
+    }
+
+    @Bean
+    CommonErrorHandler commonErrorHandler() {
+        return new KafkaConsumerErrorHandler();
     }
 }
