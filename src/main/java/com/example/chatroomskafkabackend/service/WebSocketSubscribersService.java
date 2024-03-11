@@ -12,6 +12,6 @@ public class WebSocketSubscribersService {
     private final SimpMessageSendingOperations messageTemplate;
 
     public void sendToSubscriber(Message message, String chatRoomName) {
-        this.messageTemplate.convertAndSend("/topic/chatRoom/" + chatRoomName, message);
+        this.messageTemplate.convertAndSend("/topic/chatRoom." + chatRoomName, message);
     }
 }
