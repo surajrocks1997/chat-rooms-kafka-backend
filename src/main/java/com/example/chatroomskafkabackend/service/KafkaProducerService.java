@@ -1,19 +1,23 @@
 package com.example.chatroomskafkabackend.service;
 
 import com.example.chatroomskafkabackend.pojo.Message;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class KafkaProducerService {
 
-    KafkaTemplate<String, Message> kafkaTemplate;
+    @Value("${myTopic.name}")
+    private String topicName;
 
-    public void sendMessage(String topicName, Message message) {
+    private final KafkaTemplate<String, Message> kafkaTemplate;
+
+    public void sendMessage(Message message) {
         log.info("FROM Kafka Producer Service: {}", message);
         this.kafkaTemplate.send(topicName, message);
     }
